@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holiday Countdown to Barcelona</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1542831371-d531d36971e6?ixlib=rb-4.0') no-repeat center/cover;
+    color: #fff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  }
+  #countdown {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  #label {
+    font-size: 1.2rem;
+  }
+</style>
+</head>
+<body>
+  <h1>Holiday in Barcelona</h1>
+  <div id="countdown">
+    <span id="days">--</span>d :
+    <span id="hours">--</span>h :
+    <span id="minutes">--</span>m :
+    <span id="seconds">--</span>s
+  </div>
+  <div id="label">until flight departure!</div>
+
+  <script>
+    const target = new Date('2025-08-01T07:10:00');
+    const daysEl = document.getElementById('days');
+    const hrsEl = document.getElementById('hours');
+    const minsEl = document.getElementById('minutes');
+    const secsEl = document.getElementById('seconds');
+
+    function update() {
+      const now = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        document.body.innerHTML = '<h1>Have an amazing flight! ✈️</h1>';
+        return;
+      }
+      const d = Math.floor(diff / 1000 / 60 / 60 / 24);
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+      daysEl.textContent = d;
+      hrsEl.textContent = h.toString().padStart(2,'0');
+      minsEl.textContent = m.toString().padStart(2,'0');
+      secsEl.textContent = s.toString().padStart(2,'0');
+    }
+
+    update();
+    setInterval(update, 1000);
+  </script>
+</body>
+</html>
